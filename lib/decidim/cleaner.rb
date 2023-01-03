@@ -6,8 +6,13 @@ require "decidim/cleaner/admin_engine"
 require "decidim/cleaner/component"
 
 module Decidim
-  # This namespace holds the logic of the `Cleaner` component. This component
-  # allows users to create cleaner in a participatory space.
+  # This namespace holds the logic of the `Cleaner` module.
   module Cleaner
+    include ActiveSupport::Configurable
+
+    # user_inactivity_limit: integer - Number of days of inactivity before suppression
+    config_accessor :user_inactivity_limit do
+      390
+    end
   end
 end

@@ -1,0 +1,22 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec-failures
+
+# env configuration files
+.env
+.envrc
+.rbenv-vars
+
+# default test application
+spec/decidim_dummy_app
+
+# default development application
+development_app

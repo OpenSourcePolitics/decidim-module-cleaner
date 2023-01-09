@@ -12,6 +12,8 @@ gem "bootsnap", "~> 1.4"
 gem "doorkeeper", "~> 5.5.1"
 gem "activerecord-session_store"
 
+gem "deface"
+
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 

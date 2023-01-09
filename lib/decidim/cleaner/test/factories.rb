@@ -9,4 +9,3 @@ FactoryBot.define do
     participatory_space { create(:participatory_process, :with_steps) }
   end
 end
-

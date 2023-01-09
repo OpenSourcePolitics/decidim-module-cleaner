@@ -18,6 +18,8 @@ And then execute:
 
 ```bash
 bundle
+bundle exec rails decidim_cleaner:install:migrations
+bundle exec rails db:migrate
 ```
 
 You can then add to your 'config/sidekiq.yml' file:

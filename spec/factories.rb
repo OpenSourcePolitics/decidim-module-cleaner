@@ -47,7 +47,6 @@ FactoryBot.modify do
     file_upload_settings { Decidim::OrganizationSettings.default(:upload) }
     enable_participatory_space_filters { true }
     delete_admin_logs { false }
-    delete_admin_logs_after { nil }
 
     trait :secure_context do
       host { "localhost" }
@@ -55,8 +54,8 @@ FactoryBot.modify do
 
     after(:create) do |organization, evaluator|
       if evaluator.create_static_pages
-        tos_page = Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization: organization)
-        create(:static_page, :tos, organization: organization) if tos_page.nil?
+        tos_page = Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization:)
+        create(:static_page, :tos, organization:) if tos_page.nil?
       end
     end
   end

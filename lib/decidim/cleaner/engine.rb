@@ -9,12 +9,6 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::Cleaner
 
-      routes do
-        # Add engine routes here
-        # resources :cleaner
-        # root to: "cleaner#index"
-      end
-
       initializer "Cleaner.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
@@ -33,4 +27,3 @@ module Decidim
     end
   end
 end
-

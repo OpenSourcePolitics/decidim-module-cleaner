@@ -10,8 +10,6 @@ gem "decidim-cleaner", path: "."
 gem "bootsnap", "~> 1.4"
 gem "puma", ">= 4.3"
 
-gem "deface"
-
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 

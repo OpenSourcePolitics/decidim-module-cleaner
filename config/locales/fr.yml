@@ -1,0 +1,22 @@
+---
+
+fr:
+  activemodel:
+    attributes:
+      organization:
+        delete_admin_logs: Activer la suppression de l'historique de l'administration
+        delete_admin_logs_after: Supprimer l'historique de l'administration après (jours, par défaut 365)
+  decidim:
+    admin:
+      menu:
+        clean: Nettoyeur de données
+    cleaner:
+      admin:
+        organization_cleaner:
+          edit:
+            update: Mettre à jour
+          form:
+            homepage_cleaner_title: Historique de l'administration
+    components:
+      cleaner:
+        name: Nettoyeur

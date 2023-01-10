@@ -1,6 +1,21 @@
 ---
 en:
+  activemodel:
+    attributes:
+      organization:
+        delete_admin_logs: Enable admin logs deletion
+        delete_admin_logs_after: Delete admin logs after (days, default 365)
   decidim:
+    admin:
+      menu:
+        clean: Data cleaner
+    cleaner:
+      admin:
+        organization_cleaner:
+          edit:
+            update: Update
+          form:
+            homepage_cleaner_title: Admin log
     components:
       cleaner:
         name: Cleaner

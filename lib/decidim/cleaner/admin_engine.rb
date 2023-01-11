@@ -11,12 +11,11 @@ module Decidim
 
       initializer "decidim_admin.admin_settings_menu" do
         Decidim.menu :admin_settings_menu do |menu|
-          menu.add_item :clean_organization,
-                        I18n.t("menu.clean", scope: "decidim.admin"),
-                        decidim_admin.edit_organization_cleaner_path,
-                        position: 1.8,
-                        if: allowed_to?(:update, :organization, organization: current_organization),
-                        active: is_active_link?(decidim_admin.edit_organization_cleaner_path)
+          menu.item I18n.t("menu.clean", scope: "decidim.admin"),
+                    decidim_admin.edit_organization_cleaner_path,
+                    position: 9,
+                    if: allowed_to?(:update, :organization, organization: current_organization),
+                    active: is_active_link?(decidim_admin.edit_organization_cleaner_path)
         end
       end
 

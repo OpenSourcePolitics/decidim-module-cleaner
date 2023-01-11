@@ -30,6 +30,10 @@ You can then add to your 'config/sidekiq.yml' file:
     cron: "0 9 0 * * *"
     class: Decidim::Cleaner::CleanAdminLogsJob
     queue: scheduled
+  CleanInactiveUsers:
+    cron: "0 9 0 * * *"
+    class: Decidim::Cleaner::CleanInactiveUsersJob
+    queue: scheduled
 ```
 
 ## Available tasks

@@ -47,6 +47,7 @@ FactoryBot.modify do
     file_upload_settings { Decidim::OrganizationSettings.default(:upload) }
     enable_participatory_space_filters { true }
     delete_admin_logs { false }
+    delete_inactive_users { false }
 
     trait :secure_context do
       host { "localhost" }

@@ -1,11 +1,13 @@
 ---
-
 fr:
   activemodel:
     attributes:
       organization:
-        delete_admin_logs: Activer la suppression de l'historique de l'administration
-        delete_admin_logs_after: Supprimer l'historique de l'administration après (jours, par défaut 365)
+        delete_admin_logs: Activer la suppression de l'historique d'administration
+        delete_admin_logs_after: Supprimer l'historique d'administration après (jours, par défaut 365)
+        delete_inactive_users: Activer la suppression des utilisateurs inactifs
+        delete_inactive_users_after: Supprimer les utilisateurs inactifs après (jours, par défaut 390)
+        delete_inactive_users_email_after: Envoyer un courriel aux utilisateurs inactifs avant la suppression (jours, par défaut 365)
   decidim:
     admin:
       menu:
@@ -16,7 +18,21 @@ fr:
           edit:
             update: Mettre à jour
           form:
-            homepage_cleaner_title: Historique de l'administration
+            admin_log_cleaner_title: Historique d'administration
+            inactive_users_cleaner_title: Utilisateurs inactifs
+      inactive_users_mailer:
+        warning_deletion:
+          body_1: Vous êtes inactif depuis %{days} jours sur <a href="%{organization_url}"> %{organization_name} </a>.
+          body_2: Par conséquent, votre compte a été supprimé.
+          greetings: Cordialement,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Bonjour
+          subject: Votre compte a été supprimé
+        warning_inactive:
+          body_1: Vous êtes inactif depuis %{days} jours sur %{organization_name}.
+          body_2: <a href="%{organization_url}">Si aucune réaction dans les %{remaining_days} jours</a>, votre compte sera supprimé.
+          greetings: Cordialement,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Bonjour
+          subject: Votre compte est inactif
     components:
       cleaner:
         name: Nettoyeur

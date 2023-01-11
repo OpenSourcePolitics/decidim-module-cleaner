@@ -44,7 +44,10 @@ module Decidim
         def attributes
           {
             delete_admin_logs: form.delete_admin_logs,
-            delete_admin_logs_after: form.delete_admin_logs_after
+            delete_admin_logs_after: form.delete_admin_logs_after,
+            delete_inactive_users: form.delete_inactive_users,
+            delete_inactive_users_after: form.delete_inactive_users_after,
+            delete_inactive_users_email_after: form.delete_inactive_users_email_after
           }
         end
       end

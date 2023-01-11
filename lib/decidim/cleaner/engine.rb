@@ -14,10 +14,6 @@ module Decidim
         # resources :cleaner
         # root to: "cleaner#index"
       end
-
-      initializer "Cleaner.webpacker.assets_path" do
-        Decidim.register_assets_path File.expand_path("app/packs", root)
-      end
     end
   end
 end

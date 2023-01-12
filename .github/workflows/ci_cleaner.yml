@@ -1,13 +1,5 @@
 name: "[CI] Cleaner"
-on:
-  push:
-    branches:
-      - develop
-      - release/*
-      - "*-stable"
-  pull_request:
-    branches-ignore:
-      - "chore/l10n*"
+on: [push]
 
 env:
   CI: "true"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   module Cleaner
     class UserInactivityJob < ApplicationJob
@@ -5,8 +7,6 @@ module Decidim
 
       def perform
         return unless Decidim::Cleaner.user_inactivity_enabled
-
-
       end
     end
   end

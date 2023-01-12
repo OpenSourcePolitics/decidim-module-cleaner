@@ -28,7 +28,7 @@ en:
           hello: Hello
           subject: Your account has been deleted
         warning_inactive:
-          body_1: Your are  inactive since %{days} days on %{organization_name}.
+          body_1: You are inactive since %{days} days on %{organization_name}.
           body_2: <a href="%{organization_url}">If no reaction within %{remaining_days} days </a>, your account will be deleted.
           greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
           hello: Hello

@@ -17,7 +17,7 @@ module Decidim::Cleaner
       end
 
       it "parses the body" do
-        expect(email_body(mail)).to include("You are inactive since.")
+        expect(email_body(mail)).to include("You are inactive since")
         expect(email_body(mail)).to include("If no reaction within")
       end
 
@@ -34,8 +34,8 @@ module Decidim::Cleaner
       end
 
       it "parses the body" do
-        expect(email_body(mail)).to include("Your are inactive since")
-        expect(email_body(mail)).to include("Your account has been deleted")
+        expect(email_body(mail)).to include("You are inactive since")
+        expect(email_body(mail)).to include("your account has been deleted")
       end
 
       it "includes no-reply message" do

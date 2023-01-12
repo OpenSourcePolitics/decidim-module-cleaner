@@ -16,8 +16,8 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
     end
 
     it "send emails" do
-      expect(Decidim::Cleaner::InactiveUserMailer).to receive(:warning_inactive).with(pending_user).and_call_original
-      expect(Decidim::Cleaner::InactiveUserMailer).to receive(:warning_deletion).with(inactive_user).and_call_original
+      expect(Decidim::Cleaner::InactiveUsersMailer).to receive(:warning_inactive).with(pending_user).and_call_original
+      expect(Decidim::Cleaner::InactiveUsersMailer).to receive(:warning_deletion).with(inactive_user).and_call_original
 
       subject.perform_now
     end

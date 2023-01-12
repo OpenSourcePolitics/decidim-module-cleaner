@@ -1,6 +1,38 @@
 ---
 en:
+  activemodel:
+    attributes:
+      organization:
+        delete_admin_logs: Enable admin logs deletion
+        delete_admin_logs_after: Delete admin logs after (days, default 365)
+        delete_inactive_users: Enable inactive users deletion
+        delete_inactive_users_after: Delete inactive users after (days, default 390)
+        delete_inactive_users_email_after: Send email to inactive users before deletion (days, default 365)
   decidim:
+    admin:
+      menu:
+        clean: Data cleaner
+    cleaner:
+      admin:
+        organization_cleaner:
+          edit:
+            update: Update
+          form:
+            admin_log_cleaner_title: Admin log
+            inactive_users_cleaner_title: Inactive users
+      inactive_users_mailer:
+        warning_deletion:
+          body_1: You are inactive since %{days} days on <a href="%{organization_url}"> %{organization_name} </a>.
+          body_2: As a result, your account has been deleted.
+          greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hello
+          subject: Your account has been deleted
+        warning_inactive:
+          body_1: You are inactive since %{days} days on %{organization_name}.
+          body_2: <a href="%{organization_url}">If no reaction within %{remaining_days} days </a>, your account will be deleted.
+          greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hello
+          subject: Your account is inactive
     components:
       cleaner:
         name: Cleaner

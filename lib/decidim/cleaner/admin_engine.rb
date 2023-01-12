@@ -9,14 +9,14 @@ module Decidim
       paths["db/migrate"] = nil
       paths["lib/tasks"] = nil
 
-      routes do
-        # Add admin engine routes here
-        # resources :cleaner do
-        #   collection do
-        #     resources :exports, only: [:create]
-        #   end
-        # end
-        # root to: "cleaner#index"
+      initializer "decidim_admin.admin_settings_menu" do
+        Decidim.menu :admin_settings_menu do |menu|
+          menu.item I18n.t("menu.clean", scope: "decidim.admin"),
+                    decidim_admin.edit_organization_cleaner_path,
+                    position: 9,
+                    if: allowed_to?(:update, :organization, organization: current_organization),
+                    active: is_active_link?(decidim_admin.edit_organization_cleaner_path)
+        end
       end
 
       def load_seed

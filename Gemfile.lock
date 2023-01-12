@@ -515,6 +515,8 @@ GEM
     nobspw (0.6.2)
     nokogiri (1.13.10-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-linux)
+      racc (~> 1.4)
     oauth (0.6.2)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
@@ -566,7 +568,7 @@ GEM
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (5.0.1)
-    puma (6.0.2)
+    puma (5.0.2)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.5)
@@ -780,6 +782,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   activerecord-session_store

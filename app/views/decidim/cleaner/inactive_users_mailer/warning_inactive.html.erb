@@ -2,6 +2,6 @@
 
 <p class="email-instructions"><%= t ".body_1", organization_name: h(@organization.name), days: @organization.delete_inactive_users_email_after %></p>
 
-<p class="email-instructions"><%= t(".body_2", remaining_days: @organization.delete_inactive_users_after - @organization.delete_inactive_users_email_after, organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>
+<p class="email-instructions"><%= t(".body_2", remaining_days: (@organization.delete_inactive_users_after||390) - (@organization.delete_inactive_users_email_after||365), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>
 
 <p class="email-closing"><%= t(".greetings", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>

@@ -1,6 +1,6 @@
 <p class="email-greeting"><%= t ".hello" %></p>
 
-<p class="email-instructions"><%= t(".body_1", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host), days: @organization.delete_inactive_users_after).html_safe %></p>
+<p class="email-instructions"><%= t(".body_1", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host), days: @organization.delete_inactive_users_after||390).html_safe %></p>
 
 <p class="email-instructions"><%= t ".body_2" %></p>
 

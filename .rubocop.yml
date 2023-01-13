@@ -1,4 +1,4 @@
-inherit_from: https://raw.githubusercontent.com/decidim/decidim/develop/.rubocop.yml
+inherit_from: https://raw.githubusercontent.com/decidim/decidim/release/0.26-stable/.rubocop.yml
 
 AllCops:
   Include:

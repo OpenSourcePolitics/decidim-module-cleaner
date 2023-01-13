@@ -1,4 +1,6 @@
-class AddDeleteInactiveUsersToOrganization < ActiveRecord::Migration[6.1]
+# frozen_string_literal: true
+
+class AddDeleteInactiveUsersToOrganization < ActiveRecord::Migration[6.0]
   def change
     add_column :decidim_organizations, :delete_inactive_users, :boolean, default: false, null: false
     add_column :decidim_organizations, :delete_inactive_users_email_after, :integer

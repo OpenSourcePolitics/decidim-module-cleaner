@@ -9,11 +9,12 @@ module Decidim
         Decidim::Organization.find_each do |organization|
           return unless organization.delete_inactive_users?
 
-          send_warning(Decidim::User.where(organization:)
+          send_warning(Decidim::User.where(organization: organization)
                                     .where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days)
-                                    .where("last_sign_in_at > ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days - 1.day)
-          )
-          delete_user_and_send_email(Decidim::User.where(organization:).where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_after || 390).days))
+                                    .where("last_sign_in_at > ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days - 1.day))
+          delete_user_and_send_email(Decidim::User
+                                       .where(organization: organization)
+                                       .where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_after || 390).days))
         end
       end
 

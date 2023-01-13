@@ -6,7 +6,7 @@ module Decidim::Cleaner::Admin
   describe UpdateOrganizationCleaner do
     describe "call" do
       let(:organization) { create(:organization) }
-      let(:user) { create(:user, organization:) }
+      let(:user) { create(:user, organization: organization) }
       let(:params) do
         {
           delete_admin_logs: true,

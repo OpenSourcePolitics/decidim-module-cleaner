@@ -7,8 +7,8 @@ ruby RUBY_VERSION
 gem "decidim", git: "https://github.com/decidim/decidim"
 gem "decidim-cleaner", path: "."
 
-gem "puma", ">= 4.3"
 gem "bootsnap", "~> 1.4"
+gem "puma", ">= 4.3"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri

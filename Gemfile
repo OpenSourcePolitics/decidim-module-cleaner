@@ -14,6 +14,7 @@ group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
   gem "decidim-dev", git: "https://github.com/decidim/decidim", branch: "release/0.26-stable"
+  gem "rubocop-faker"
 end
 
 group :development do

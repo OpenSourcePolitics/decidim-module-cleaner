@@ -175,8 +175,8 @@ GIT
 PATH
   remote: .
   specs:
-    decidim-cleaner (0.26.4)
-      decidim-core (= 0.26.4)
+    decidim-cleaner (0.0.1)
+      decidim-core (~> 0.26.4)
 
 GEM
   remote: https://rubygems.org/
@@ -797,4 +797,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.22
+   2.3.14

@@ -174,8 +174,8 @@ GIT
 PATH
   remote: .
   specs:
-    decidim-cleaner (0.28.0.dev)
-      decidim-core (= 0.28.0.dev)
+    decidim-cleaner (0.1.0)
+      decidim-core (~> 0.28.0.dev)
 
 GEM
   remote: https://rubygems.org/

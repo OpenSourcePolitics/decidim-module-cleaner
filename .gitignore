@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+.rubocop-https---raw-githubusercontent-com*
 
 # rspec failure tracking
 .rspec-failures

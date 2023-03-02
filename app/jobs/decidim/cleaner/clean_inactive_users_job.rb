@@ -18,17 +18,22 @@ module Decidim
 
       def send_warning(users)
         users.find_each do |user|
-          InactiveUsersMailer.warning_inactive(user).deliver_now if user.email.present?
+          next if user.deleted?
+
+          InactiveUsersMailer.warning_inactive(user).deliver_now
           Rails.logger.info "Inactive warning sent to #{user.email}"
         end
       end
 
       def delete_user_and_send_email(users)
         users.find_each do |user|
-          InactiveUsersMailer.warning_deletion(user).deliver_now if user.email.present?
+          next if user.deleted?
+
+          InactiveUsersMailer.warning_deletion(user).deliver_now
           Rails.logger.info "Deletion warning sent to #{user.email}"
-          user.delete
-          Rails.logger.info "User #{user.email} deleted"
+
+          Decidim::DestroyAccount.call(user, Decidim::DeleteAccountForm.from_params({ delete_reason: I18n.t("decidim.cleaner.delete_reason") }))
+          Rails.logger.info "User with id #{user.id} destroyed"
         end
       end
     end

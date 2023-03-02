@@ -23,11 +23,12 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
     end
 
     it "delete user" do
-      expect(Decidim::User.count).to eq(3)
-
       subject.perform_now
 
-      expect(Decidim::User.count).to eq(2)
+      expect(Decidim::User.count).to eq(3)
+      expect(inactive_user.reload).to be_deleted
+      expect(pending_user.reload).not_to be_deleted
+      expect(user.reload).not_to be_deleted
     end
 
     context "when users have destroyed his/her account" do
@@ -41,12 +42,13 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
         subject.perform_now
       end
 
-      it "delete user" do
-        expect(Decidim::User.count).to eq(3)
-
+      it "destroy user" do
         subject.perform_now
 
-        expect(Decidim::User.count).to eq(2)
+        expect(Decidim::User.count).to eq(3)
+        expect(inactive_user.reload).to be_deleted
+        expect(pending_user.reload).to be_deleted
+        expect(user.reload).not_to be_deleted
       end
     end
   end

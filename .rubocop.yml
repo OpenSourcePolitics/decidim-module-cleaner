@@ -11,3 +11,5 @@ AllCops:
     - "node_modules/**/*"
     - "db/schema.rb"
     - "vendor/**/*"
+    - "spec/decidim_dummy_app/**/*"
+    - "development_app/**/*"

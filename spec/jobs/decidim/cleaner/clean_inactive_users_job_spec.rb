@@ -29,5 +29,25 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
 
       expect(Decidim::User.count).to eq(2)
     end
+
+    context "when users have destroyed his/her account" do
+      let!(:pending_user) { create(:user, :deleted, organization:, last_sign_in_at: 25.days.ago - 1.hour) }
+      let!(:inactive_user) { create(:user, :deleted, organization:, last_sign_in_at: 50.days.ago) }
+
+      it "doesn't send email" do
+        expect(Decidim::Cleaner::InactiveUsersMailer).not_to receive(:warning_inactive).with(pending_user).and_call_original
+        expect(Decidim::Cleaner::InactiveUsersMailer).not_to receive(:warning_deletion).with(inactive_user).and_call_original
+
+        subject.perform_now
+      end
+
+      it "delete user" do
+        expect(Decidim::User.count).to eq(3)
+
+        subject.perform_now
+
+        expect(Decidim::User.count).to eq(2)
+      end
+    end
   end
 end

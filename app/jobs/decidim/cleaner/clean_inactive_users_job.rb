@@ -17,15 +17,15 @@ module Decidim
       end
 
       def send_warning(users)
-        users.each do |user|
-          InactiveUsersMailer.warning_inactive(user).deliver_now
+        users.find_each do |user|
+          InactiveUsersMailer.warning_inactive(user).deliver_now if user.email.present?
           Rails.logger.info "Inactive warning sent to #{user.email}"
         end
       end
 
       def delete_user_and_send_email(users)
-        users.each do |user|
-          InactiveUsersMailer.warning_deletion(user).deliver_now
+        users.find_each do |user|
+          InactiveUsersMailer.warning_deletion(user).deliver_now if user.email.present?
           Rails.logger.info "Deletion warning sent to #{user.email}"
           user.delete
           Rails.logger.info "User #{user.email} deleted"

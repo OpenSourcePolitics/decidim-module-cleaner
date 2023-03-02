@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 module Decidim
   # This holds the decidim-meetings version.
   module Cleaner
@@ -12,3 +13,4 @@ module Decidim
     end
   end
 end
+# :nocov:

@@ -7,13 +7,13 @@ module Decidim
 
       def perform
         Decidim::Organization.find_each do |organization|
-          return unless organization.delete_inactive_users?
+          next unless organization.delete_inactive_users?
 
           send_warning(Decidim::User.where(organization: organization)
                                     .where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days)
-                                    .where("last_sign_in_at > ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days - 1.day)
-          )
-          delete_user_and_send_email(Decidim::User.where(organization: organization).where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_after || 390).days))
+                                    .where("last_sign_in_at > ?", Time.zone.now - (organization.delete_inactive_users_email_after || 365).days - 1.day))
+          delete_user_and_send_email(Decidim::User.where(organization: organization)
+                                                  .where("last_sign_in_at < ?", Time.zone.now - (organization.delete_inactive_users_after || 390).days))
         end
       end
 
@@ -33,7 +33,7 @@ module Decidim
           InactiveUsersMailer.warning_deletion(user).deliver_now
           Rails.logger.info "Deletion warning sent to #{user.email}"
 
-          Decidim::DestroyAccount.call(user, Decidim::DeleteAccountForm.from_params({ delete_reason: I18n.t("decidim.cleaner.delete_reason") }))
+          Decidim::DestroyAccount.call(user, Decidim::DeleteAccountForm.from_params(delete_reason: I18n.t("decidim.cleaner.delete_reason")))
           Rails.logger.info "User with id #{user.id} destroyed"
         end
       end

@@ -5,11 +5,11 @@ module Decidim
   # This holds the decidim-meetings version.
   module Cleaner
     def self.version
-      "0.1.0"
+      "1.0.0"
     end
 
     def self.decidim_version
-      "0.28.0.dev"
+      "0.28"
     end
   end
 end

@@ -9,6 +9,10 @@ module Decidim
       paths["db/migrate"] = nil
       paths["lib/tasks"] = nil
 
+      def load_seed
+        nil
+      end
+
       initializer "decidim_admin.admin_settings_menu" do
         Decidim.menu :admin_settings_menu do |menu|
           menu.item I18n.t("menu.clean", scope: "decidim.admin"),
@@ -17,10 +21,6 @@ module Decidim
                     if: allowed_to?(:update, :organization, organization: current_organization),
                     active: is_active_link?(decidim_admin.edit_organization_cleaner_path)
         end
-      end
-
-      def load_seed
-        nil
       end
     end
   end

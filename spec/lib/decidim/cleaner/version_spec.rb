@@ -11,7 +11,8 @@ module Decidim
     end
 
     it "has decidim version compatibility" do
-      expect(subject.decidim_version).to eq("0.26")
+      expect(subject.minimum_decidim_version).to eq("0.26.0")
+      expect(subject.maximum_decidim_version).to eq("0.28.0")
     end
   end
 end

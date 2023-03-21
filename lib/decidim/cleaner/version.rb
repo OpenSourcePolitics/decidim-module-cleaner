@@ -8,8 +8,12 @@ module Decidim
       "1.0.1"
     end
 
-    def self.decidim_version
-      "0.26"
+    def self.minimum_decidim_version
+      "0.26.0"
+    end
+
+    def self.maximum_decidim_version
+      "0.28.0"
     end
   end
 end

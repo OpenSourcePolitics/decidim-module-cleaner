@@ -29,15 +29,15 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        decidim-version: [ "0.26", "0.27", "0.28.dev" ]
+        decidim_version: [ "0.26", "0.27", "0.28.dev" ]
         include:
-          - decidim: "0.28.dev"
+          - decidim_version: "0.28.dev"
             ruby_version: 3.1.1
             node_version: 16.9.1
-          - decidim: "0.27"
+          - decidim_version: "0.27"
             ruby_version: 3.1.1
             node_version: 16.9.1
-          - decidim: "0.26"
+          - decidim_version: "0.26"
             ruby_version: 2.7.5
             node_version: 16.9.1
     runs-on: ubuntu-latest
@@ -57,6 +57,7 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile-${{ matrix.decidim_version }}.gemfile
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
         if: "github.ref != 'refs/heads/develop'"
@@ -68,9 +69,11 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: ${{ matrix.ruby_version }}
+
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.node_version }}
       - name: Get npm cache directory path
         id: npm-cache-dir-path
         run: echo "::set-output name=dir::$(npm get cache)-cleaner"

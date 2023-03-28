@@ -17,7 +17,7 @@ module Decidim
           enforce_permission_to :update, :organization, organization: current_organization
           @form = form(OrganizationCleanerForm).from_params(params)
 
-          UpdateOrganizationCleaner.call(current_organization, @form) do
+          update_organization_cleaner.call(current_organization, @form) do
             on(:ok) do
               flash[:notice] = I18n.t("organization.update.success", scope: "decidim.admin")
 
@@ -29,6 +29,14 @@ module Decidim
               render :edit
             end
           end
+        end
+
+        private
+
+        def update_organization_cleaner
+          return UpdateOrganizationCleaner if defined?(Decidim::Command)
+
+          UpdateOrganizationCleanerLegacy
         end
       end
     end

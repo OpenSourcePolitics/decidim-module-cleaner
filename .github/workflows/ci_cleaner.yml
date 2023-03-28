@@ -23,11 +23,28 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: ${{ env.RUBY_VERSION }}
       - name: Run Rubocop
         run: bundle exec rubocop -P
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        decidim_version: ["0.26", "0.27", "0.28.dev"]
+        include:
+          - decidim_version: "0.26"
+            RUBY_VERSION: 2.7.5
+            NODE_VERSION: 16.9.1
+            BUNDLE_GEMFILE: Gemfile-0.26.gemfile
+          - decidim_version: "0.27"
+            RUBY_VERSION: 3.0.2
+            NODE_VERSION: 16.9.1
+            BUNDLE_GEMFILE: Gemfile-0.27.gemfile
+          - decidim_version: "0.28.dev"
+            RUBY_VERSION: 3.1.1
+            NODE_VERSION: 16.9.1
+            BUNDLE_GEMFILE: Gemfile
     timeout-minutes: 30
     services:
       postgres:
@@ -44,6 +61,7 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.BUNDLE_GEMFILE }}
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
         if: "github.ref != 'refs/heads/develop'"
@@ -55,9 +73,10 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: ${{ matrix.RUBY_VERSION }}
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.NODE_VERSION }}
       - name: Get npm cache directory path
         id: npm-cache-dir-path
         run: echo "::set-output name=dir::$(npm get cache)-cleaner"

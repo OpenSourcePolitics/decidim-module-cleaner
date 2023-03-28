@@ -3,7 +3,14 @@
 require "spec_helper"
 
 module Decidim::Cleaner::Admin
-  describe UpdateOrganizationCleaner do
+  describe "UpdateOrganizationCleaner" do
+    described_class do
+      if defined?(Decidim::Command)
+        UpdateOrganizationCleaner
+      else
+        UpdateOrganizationCleanerLegacy
+      end
+    end
     describe "call" do
       let(:organization) { create(:organization) }
       let(:user) { create(:user, organization: organization) }

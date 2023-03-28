@@ -4,13 +4,6 @@ require "spec_helper"
 
 module Decidim::Cleaner::Admin
   describe "UpdateOrganizationCleaner" do
-    described_class do
-      if defined?(Decidim::Command)
-        UpdateOrganizationCleaner
-      else
-        UpdateOrganizationCleanerLegacy
-      end
-    end
     describe "call" do
       let(:organization) { create(:organization) }
       let(:user) { create(:user, organization: organization) }
@@ -32,7 +25,7 @@ module Decidim::Cleaner::Admin
       let(:form) do
         OrganizationCleanerForm.from_params(params).with_context(context)
       end
-      let(:command) { described_class.new(organization, form) }
+      let(:command) { Decidim::Cleaner::LegacyHelper.update_organization_cleaner_command.new(organization, form) }
 
       describe "when the form is not valid" do
         before do

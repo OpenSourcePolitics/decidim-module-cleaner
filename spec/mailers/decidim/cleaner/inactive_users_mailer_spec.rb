@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Cleaner
   describe InactiveUsersMailer do
-    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:user) { create(:user, :confirmed, organization:) }
     let(:organization) { create(:organization, delete_inactive_users: true) }
     let(:organization_url) { "http://www.example.com" }
     let(:decidim) { Decidim::Core::Engine.routes.url_helpers }

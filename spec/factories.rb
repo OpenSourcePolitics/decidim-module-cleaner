@@ -55,8 +55,8 @@ FactoryBot.modify do
 
     after(:create) do |organization, evaluator|
       if evaluator.create_static_pages
-        tos_page = Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization:)
-        create(:static_page, :tos, organization:) if tos_page.nil?
+        tos_page = Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization: organization)
+        create(:static_page, :tos, organization: organization) if tos_page.nil?
       end
     end
   end

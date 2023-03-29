@@ -3,7 +3,7 @@ inherit_from:
   - .rubocop_rails.yml
 
 AllCops:
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.0
   Include:
     - "**/*.rb"
     - "**/*.rake"

@@ -252,7 +252,7 @@ Style/BlockDelimiters:
     - let!
     - subject
     - watch
-  AllowedMethods:
+  IgnoredMethods:
     # Methods that can be either procedural or functional and cannot be
     # categorised from their usage alone, e.g.
     #

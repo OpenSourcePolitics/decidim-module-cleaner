@@ -18,7 +18,7 @@ module Decidim::Cleaner::Admin
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     context "when user is admin" do
-      let(:user) { create(:user, :admin, organization:) }
+      let(:user) { create(:user, :admin, organization: organization) }
 
       it { is_expected.to be_truthy }
 
@@ -32,7 +32,7 @@ module Decidim::Cleaner::Admin
     end
 
     context "when user is not admin" do
-      let(:user) { create(:user, organization:) }
+      let(:user) { create(:user, organization: organization) }
 
       it_behaves_like "permission is not set"
     end

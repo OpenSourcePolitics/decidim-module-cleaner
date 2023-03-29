@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-describe "Admin manages organization cleaning", type: :system do
+describe "Admin manages organization cleaning" do
   let(:organization) { create(:organization) }
-  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
 
   before do
     switch_to_host(organization.host)

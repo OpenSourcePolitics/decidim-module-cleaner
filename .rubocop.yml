@@ -3,7 +3,7 @@ inherit_from:
   - .rubocop_rails.yml
 
 AllCops:
-  TargetRubyVersion: 2.7.5
+  TargetRubyVersion: 3.1
   Include:
     - "**/*.rb"
     - "**/*.rake"
@@ -16,3 +16,7 @@ AllCops:
     - "vendor/**/*"
     - "spec/decidim_dummy_app/**/*"
     - "development_app/**/*"
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/system/*

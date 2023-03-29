@@ -9,7 +9,7 @@ module Decidim
         Decidim::Organization.find_each do |organization|
           next unless organization.delete_admin_logs?
 
-          Decidim::ActionLog.where(organization: organization)
+          Decidim::ActionLog.where(organization:)
                             .where("created_at < ?", delete_admin_logs_before_date(organization))
                             .delete_all
         end

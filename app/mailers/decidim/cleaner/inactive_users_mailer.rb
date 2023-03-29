@@ -14,7 +14,7 @@ module Decidim
             "decidim.cleaner.inactive_users_mailer.warning_inactive.subject",
             organization_name: @organization.name
           )
-          mail(to: user.email, subject: subject)
+          mail(to: user.email, subject:)
         end
       end
 
@@ -26,7 +26,7 @@ module Decidim
             "decidim.cleaner.inactive_users_mailer.warning_deletion.subject",
             organization_name: @organization.name
           )
-          mail(to: user.email, subject: subject)
+          mail(to: user.email, subject:)
         end
       end
     end

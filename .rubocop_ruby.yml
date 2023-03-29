@@ -70,11 +70,6 @@ AllCops:
   # Otherwise we fallback to the oldest officially supported Ruby version (2.0).
   TargetRubyVersion: 2.7
 
-  RSpec:
-    Patterns:
-      - "(?:^|/)spec/"
-      - "(?:^|/)test/"
-
 # Indent private/protected/public as deep as method definitions
 Layout/AccessModifierIndentation:
   EnforcedStyle: indent
@@ -257,7 +252,7 @@ Style/BlockDelimiters:
     - let!
     - subject
     - watch
-  IgnoredMethods:
+  AllowedMethods:
     # Methods that can be either procedural or functional and cannot be
     # categorised from their usage alone, e.g.
     #

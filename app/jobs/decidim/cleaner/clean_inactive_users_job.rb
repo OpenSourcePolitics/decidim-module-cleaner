@@ -9,16 +9,20 @@ module Decidim
         Decidim::Organization.find_each do |organization|
           next unless organization.delete_inactive_users?
 
-          send_warning(Decidim::User.where(organization: organization)
+          send_warning(Decidim::User.where(organization:)
+                                    .not_deleted
+                                    .where.not(email: "")
                                     .where("last_sign_in_at < ?", email_inactive_before_date(organization)))
-          delete_user_and_send_email(Decidim::User.where(organization: organization)
+          delete_user_and_send_email(Decidim::User.where(organization:)
+                                                  .not_deleted
+                                                  .where.not(email: "")
                                                   .where("warning_date < ?", delete_inactive_before_date(organization)))
         end
       end
 
       def send_warning(users)
         users.find_each do |user|
-          next if user.deleted? || user.warning_date.present?
+          next if user.warning_date.present?
 
           user.update!(warning_date: Time.zone.now) if InactiveUsersMailer.warning_inactive(user).deliver_now
           Rails.logger.info "Inactive warning sent to #{user.email}"
@@ -27,8 +31,6 @@ module Decidim
 
       def delete_user_and_send_email(users)
         users.find_each do |user|
-          next if user.deleted?
-
           if user.last_sign_in_at > user.warning_date
             user.update!(warning_date: nil)
             Rails.logger.info "User with id #{user.id} has logged in again, warning date reset"

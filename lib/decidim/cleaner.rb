@@ -10,7 +10,7 @@ module Decidim
     include ActiveSupport::Configurable
 
     config_accessor :delete_admin_logs_after do
-      365
+      ENV.fetch("DECIDIM_CLEANER_DELETE_ADMIN_LOG", "365").to_i
     end
 
     config_accessor :delete_inactive_users_after do

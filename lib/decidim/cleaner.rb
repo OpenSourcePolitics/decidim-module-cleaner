@@ -14,7 +14,7 @@ module Decidim
     end
 
     config_accessor :delete_inactive_users_after do
-      30
+      ENV.fetch("DECIDIM_CLEANER_DELETE_INACTIVE_USERS", "30").to_i
     end
 
     config_accessor :delete_inactive_users_email_after do

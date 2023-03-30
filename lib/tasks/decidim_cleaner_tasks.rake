@@ -11,5 +11,10 @@ namespace :decidim_cleaner do
   task clean_admin_logs: :environment do
     Decidim::Cleaner::CleanAdminLogsJob.perform_now
   end
+
+  desc "Deletes versions for deleted users"
+  task clean_deleted_users_data: :environment do
+    Decidim::Cleaner::CleanDeletedUsersDataJob.perform_now
+  end
 end
 # :nocov:

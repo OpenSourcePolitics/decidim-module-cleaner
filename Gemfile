@@ -7,10 +7,10 @@ ruby RUBY_VERSION
 gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "alt/petition_merge"
 gem "decidim-cleaner", path: "."
 
-gem "puma", ">= 4.3"
+gem "activerecord-session_store"
 gem "bootsnap", "~> 1.4"
 gem "doorkeeper", "~> 5.5.1"
-gem "activerecord-session_store"
+gem "puma", ">= 4.3"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri

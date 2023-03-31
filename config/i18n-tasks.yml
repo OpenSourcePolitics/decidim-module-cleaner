@@ -12,4 +12,3 @@ ignore_unused:
   - decidim.admin.menu.clean
 
 ignore_missing:
-

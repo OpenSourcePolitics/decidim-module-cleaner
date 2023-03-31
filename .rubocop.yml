@@ -1,4 +1,4 @@
-inherit_from: https://raw.githubusercontent.com/decidim/decidim/develop/.rubocop.yml
+inherit_from: https://raw.githubusercontent.com/OpenSourcePolitics/decidim/alt/petition_merge/.rubocop.yml
 
 AllCops:
   Include:
@@ -11,3 +11,5 @@ AllCops:
     - "node_modules/**/*"
     - "db/schema.rb"
     - "vendor/**/*"
+    - "spec/decidim_dummy_app/**/*"
+    - "development_app/**/*"

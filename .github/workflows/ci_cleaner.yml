@@ -1,13 +1,32 @@
-name: "[CI] Cleaner"
+name: "CI/CD"
 on: [push]
 
 env:
   CI: "true"
+  CODECOV: "true"
   RUBY_VERSION: 3.1.1
   NODE_VERSION: 16.9.1
+  RAILS_ENV: test
 
 jobs:
-  main:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
+        if: "github.ref != 'refs/heads/develop'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2.0.0
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run Rubocop
+        run: bundle exec rubocop -P
+  tests:
     name: Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30

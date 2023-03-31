@@ -1,10 +1,15 @@
 ---
 
 base_locale: en
-locales: [en]
+locales: [en, fr]
 
 ignore_unused:
-  - "decidim.components.cleaner.name"
+  - activemodel.attributes.organization.delete_admin_logs
+  - activemodel.attributes.organization.delete_admin_logs_after
+  - activemodel.attributes.organization.delete_inactive_users
+  - activemodel.attributes.organization.delete_inactive_users_after
+  - activemodel.attributes.organization.delete_inactive_users_email_after
+  - decidim.admin.menu.clean
 
 ignore_missing:
-  - decidim.participatory_processes.scopes.global
+

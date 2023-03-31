@@ -22,19 +22,6 @@ bundle exec rails decidim_cleaner:install:migrations
 bundle exec rails db:migrate
 ```
 
-You can then modify the default values of the cleaner in your .ENV with the following variables:
-
-```bash
-# Delay until a user is considered inactive and receive a warning email (in days)
-DECIDIM_CLEANER_INACTIVE_USERS_MAIL=
-
-# Delay until a user is deleted after receiving an email (in days)
-DECIDIM_CLEANER_DELETE_INACTIVE_USERS=
-
-# Delay until an admin log is deleted (in days)
-DECIDIM_CLEANER_DELETE_ADMIN_LOGS=
-```
-
 ### Sidekiq Scheduler
 [Further documentation](https://github.com/sidekiq-scheduler/sidekiq-scheduler)
 

@@ -25,14 +25,20 @@ bundle exec rails db:migrate
 You can then modify the default values of the cleaner in your .ENV with the following variables:
 
 ```bash
-# Delay until a user is considered inactive and receive a warning email (in days)
+# Delay until a user is considered inactive and receive a warning email (in days, default: 365)
 DECIDIM_CLEANER_INACTIVE_USERS_MAIL=
 
-# Delay until a user is deleted after receiving an email (in days)
+# Delay until a user is deleted after receiving an email (in days, default: 30)
 DECIDIM_CLEANER_DELETE_INACTIVE_USERS=
 
-# Delay until an admin log is deleted (in days)
+# Delay until an admin log is deleted (in days, default: 365)
 DECIDIM_CLEANER_DELETE_ADMIN_LOGS=
+
+# Delay until user's versions are deleted after the user deletion (in days, default: 30)
+DECIDIM_CLEANER_DELETE_DELETED_USERS_DATA=
+
+# Delay until deleted authorization's versions are deleted after the authorization creation (in days, default: 30)
+DECIDIM_CLEANER_DELETE_DELETED_AUTHORIZATIONS_DATA=
 ```
 
 ### Sidekiq Scheduler
@@ -51,6 +57,10 @@ You can then add to your 'config/sidekiq.yml' file:
   CleanInactiveUsers:
     cron: "0 9 0 * * *"
     class: Decidim::Cleaner::CleanInactiveUsersJob
+    queue: scheduled
+  CleanDeletedUsersData:
+    cron: "0 9 0 * * *"
+    class: Decidim::Cleaner::CleanDeletedUsersDataJob
     queue: scheduled
 ```
 

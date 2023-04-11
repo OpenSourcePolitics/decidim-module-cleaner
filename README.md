@@ -22,6 +22,24 @@ bundle exec rails decidim_cleaner:install:migrations
 bundle exec rails db:migrate
 ```
 
+You can then modify the default values of the cleaner in your .ENV with the following variables:
+
+```bash
+# Delay until a user is considered inactive and receive a warning email (in days)
+DECIDIM_CLEANER_INACTIVE_USERS_MAIL=
+
+# Delay until a user is deleted after receiving an email (in days)
+DECIDIM_CLEANER_DELETE_INACTIVE_USERS=
+
+# Delay until an admin log is deleted (in days)
+DECIDIM_CLEANER_DELETE_ADMIN_LOGS=
+```
+
+### Sidekiq Scheduler
+[Further documentation](https://github.com/sidekiq-scheduler/sidekiq-scheduler)
+
+**Sidekiq scheduler uses a 6 columns format**
+
 You can then add to your 'config/sidekiq.yml' file:
 
 ```yaml
@@ -34,6 +52,15 @@ You can then add to your 'config/sidekiq.yml' file:
     cron: "0 9 0 * * *"
     class: Decidim::Cleaner::CleanInactiveUsersJob
     queue: scheduled
+```
+
+### Cronjob
+```
+# Warns and deletes inactive users
+0 9 * * * cd /home/user/decidim_application && RAILS_ENV=production bundle exec rake decidim_cleaner:clean_inactive_users
+
+# Deletes old admin logs
+0 9 * * * cd /home/user/decidim_application && RAILS_ENV=production bundle exec rake decidim_cleaner:clean_admin_logs
 ```
 
 ## Available tasks

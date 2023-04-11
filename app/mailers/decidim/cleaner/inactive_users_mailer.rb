@@ -5,6 +5,8 @@ module Decidim
     # A custom mailer for Decidim so we can notify users
     # when their account was blocked
     class InactiveUsersMailer < Decidim::ApplicationMailer
+      helper Decidim::Cleaner::DelaysHelper
+
       def warning_inactive(user)
         with_user(user) do
           @user = user

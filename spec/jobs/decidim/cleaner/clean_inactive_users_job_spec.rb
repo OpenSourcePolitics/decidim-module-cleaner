@@ -53,7 +53,7 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
     end
 
     context "when user reconnect after warning" do
-      let!(:inactive_user) { create(:user, organization:, last_sign_in_at: 7.days.ago, warning_date: 10.days.ago) }
+      let!(:inactive_user) { create(:user, organization: organization, last_sign_in_at: 7.days.ago, warning_date: 10.days.ago) }
 
       it "doesn't send email" do
         expect(Decidim::Cleaner::InactiveUsersMailer).not_to receive(:warning_deletion).with(inactive_user).and_call_original

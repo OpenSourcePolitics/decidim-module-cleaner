@@ -7,8 +7,8 @@ fr:
         delete_admin_logs_after: Supprimer l'historique d'administration après (jours,
           par défaut 365)
         delete_inactive_users: Activer la suppression des utilisateurs inactifs
-        delete_inactive_users_after: Supprimer les utilisateurs inactifs après (jours,
-          par défaut 390)
+        delete_inactive_users_after: Supprimer les utilisateurs inactifs au bout de
+          x jours après le courriel (jours, par défaut 30)
         delete_inactive_users_email_after: Envoyer un courriel aux utilisateurs inactifs
           avant la suppression (jours, par défaut 365)
   decidim:

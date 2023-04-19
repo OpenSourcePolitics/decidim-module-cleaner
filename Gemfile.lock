@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-cleaner (2.0.0)
+    decidim-cleaner (2.1.0)
       decidim-core (~> 0.26.0)
 
 GEM
@@ -790,7 +790,7 @@ DEPENDENCIES
   web-console (~> 4.2)
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.6
+   2.4.9

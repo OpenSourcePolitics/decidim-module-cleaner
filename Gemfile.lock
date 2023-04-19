@@ -174,7 +174,7 @@ GIT
 PATH
   remote: .
   specs:
-    decidim-cleaner (4.0.0)
+    decidim-cleaner (4.1.0)
       decidim-core (~> 0.28.dev)
 
 GEM

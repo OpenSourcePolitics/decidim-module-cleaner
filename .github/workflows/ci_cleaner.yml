@@ -45,9 +45,38 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: OpenSourcePolitics/rspec-action@master
+        with:
+          command: "bundle exec rspec --exclude-pattern 'spec/system/**/*_spec.rb'"
+  system_tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
+        if: "github.ref != 'refs/heads/develop'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: OpenSourcePolitics/rspec-action@master
+        with:
+          command: "bundle exec rspec spec/system"
   release:
     if: "github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release' )"
-    needs: [tests, lint]
+    needs: [tests, system_tests, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/release-gem-action@master

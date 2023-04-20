@@ -24,11 +24,10 @@ module Decidim
         end
 
         it "removes the versions that should be removed" do
-          expect(PaperTrail::Version.count).to eq(4)
+          expect do
+            subject.perform_now
+          end.to change(PaperTrail::Version, :count).from(4).to(2)
 
-          subject.perform_now
-
-          expect(PaperTrail::Version.count).to eq(2)
           expect(PaperTrail::Version.first.item).to eq(user)
           expect(PaperTrail::Version.last.item_type).to eq("Decidim::Authorization")
         end

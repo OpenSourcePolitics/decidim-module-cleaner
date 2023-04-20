@@ -47,40 +47,10 @@ jobs:
         if: "github.ref != 'refs/heads/develop'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - uses: actions/checkout@v2.0.0
+      - uses: OpenSourcePolitics/rspec-action@master
         with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Get npm cache directory path
-        id: npm-cache-dir-path
-        run: echo "::set-output name=dir::$(npm get cache)-cleaner"
-      - uses: actions/cache@v2
-        id: npm-cache
-        with:
-          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-          key: npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-
-      - run: bundle exec rake test_app
-        name: Create test app
-      - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
-        name: Create the screenshots folder
-      - uses: nanasess/setup-chromedriver@v1.0.1
-      - uses: OpenSourcePolitics/cache-precompile-action@master
-      - run: bundle exec rspec
-        name: RSpec
-      - uses: codecov/codecov-action@v1
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: screenshots
-          path: ./spec/decidim_dummy_app/tmp/screenshots
-          if-no-files-found: ignore
+          ruby_version: ${{ env.RUBY_VERSION }}
+          node_version: ${{ env.NODE_VERSION }}
   release:
     if: "github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release' )"
     needs: [tests, lint]

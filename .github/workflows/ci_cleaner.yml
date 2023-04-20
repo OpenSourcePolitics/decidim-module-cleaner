@@ -20,9 +20,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: OpenSourcePolitics/lint-action@master
-        with:
-          ruby_version: ${{ env.RUBY_VERSION }}
-          node_version: ${{ env.NODE_VERSION }}
   tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -48,9 +45,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: OpenSourcePolitics/rspec-action@master
-        with:
-          ruby_version: ${{ env.RUBY_VERSION }}
-          node_version: ${{ env.NODE_VERSION }}
   release:
     if: "github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release' )"
     needs: [tests, lint]
@@ -61,14 +55,4 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Publish to RubyGems
-        run: |
-          mkdir -p $HOME/.gem
-          touch $HOME/.gem/credentials
-          chmod 0600 $HOME/.gem/credentials
-          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-          gem build *.gemspec
-          gem push *.gem
-        env:
-          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_API_KEY}}"
+      - uses: OpenSourcePolitics/publish-gem-action@master

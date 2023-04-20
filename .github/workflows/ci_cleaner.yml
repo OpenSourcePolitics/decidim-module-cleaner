@@ -80,8 +80,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/release-gem-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
   publish:
     needs: release
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/publish-gem-action@master
+        with:
+          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}

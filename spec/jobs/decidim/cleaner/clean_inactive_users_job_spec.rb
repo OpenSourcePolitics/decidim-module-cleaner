@@ -7,8 +7,8 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
 
   context "when the delay is specified" do
     let!(:organization) { create(:organization, delete_inactive_users: true, delete_inactive_users_email_after: 25, delete_inactive_users_after: 5) }
-    let!(:pending_user) { create(:user, organization: organization, last_sign_in_at: 27.days.ago) }
-    let!(:inactive_user) { create(:user, organization: organization, last_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
+    let!(:pending_user) { create(:user, organization: organization, current_sign_in_at: 27.days.ago) }
+    let!(:inactive_user) { create(:user, organization: organization, current_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
     let!(:user) { create(:user, organization: organization) }
 
     it "enqueues job in queue 'cleaner'" do
@@ -32,8 +32,13 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
     end
 
     context "when users have destroyed his/her account" do
+<<<<<<< HEAD
       let!(:pending_user) { create(:user, :deleted, organization: organization, last_sign_in_at: 27.days.ago) }
       let!(:inactive_user) { create(:user, :deleted, organization: organization, last_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
+=======
+      let!(:pending_user) { create(:user, :deleted, organization:, current_sign_in_at: 27.days.ago) }
+      let!(:inactive_user) { create(:user, :deleted, organization:, current_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
+>>>>>>> 6a396a6 (Use current sign in at (#33))
 
       it "doesn't send email" do
         expect(Decidim::Cleaner::InactiveUsersMailer).not_to receive(:warning_inactive).with(pending_user).and_call_original
@@ -53,7 +58,11 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
     end
 
     context "when user reconnect after warning" do
+<<<<<<< HEAD
       let!(:inactive_user) { create(:user, organization: organization, last_sign_in_at: 7.days.ago, warning_date: 10.days.ago) }
+=======
+      let!(:inactive_user) { create(:user, organization:, current_sign_in_at: 7.days.ago, warning_date: 10.days.ago) }
+>>>>>>> 6a396a6 (Use current sign in at (#33))
 
       it "doesn't send email" do
         expect(Decidim::Cleaner::InactiveUsersMailer).not_to receive(:warning_deletion).with(inactive_user).and_call_original

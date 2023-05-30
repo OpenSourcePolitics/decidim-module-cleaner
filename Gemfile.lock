@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-cleaner (2.1.0)
+    decidim-cleaner (2.1.1)
       decidim-core (~> 0.26.0)
 
 GEM
@@ -771,6 +771,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
   x86_64-darwin-21
   x86_64-linux
 

@@ -12,7 +12,7 @@ module Decidim
           send_warning(Decidim::User.where(organization: organization)
                                     .not_deleted
                                     .where.not(email: "")
-                                    .where("last_sign_in_at < ?", email_inactive_before_date(organization)))
+                                    .where("current_sign_in_at < ?", email_inactive_before_date(organization)))
 
           delete_user_and_send_email(Decidim::User.where(organization: organization)
                                                   .not_deleted
@@ -32,7 +32,7 @@ module Decidim
 
       def delete_user_and_send_email(users)
         users.find_each do |user|
-          if user.last_sign_in_at > user.warning_date
+          if user.current_sign_in_at > user.warning_date
             user.update!(warning_date: nil)
             Rails.logger.info "User with id #{user.id} has logged in again, warning date reset"
             next

@@ -1,0 +1,40 @@
+---
+en:
+  activemodel:
+    attributes:
+      organization:
+        delete_admin_logs: Ota käyttöön hallintatoimintojen lokien poistaminen
+        delete_admin_logs_after: Hallintatoimintojen lokien säilytysaika (päivää, oletusarvo 365)
+        delete_inactive_users: Ota käyttöön passiivisten käyttäjätilien poisto
+        delete_inactive_users_after: Passiivisten käyttäjätilien säilytysaika varoitusviestin lähetyksen jälkeen (päivää, oletusarvo 30)
+        delete_inactive_users_email_after: Käyttäjätilin poiston varoitusviestin lähetysaika käyttäjätilin ollessa passiivinen (päivää, oletusarvo 365)
+  decidim:
+    admin:
+      menu:
+        clean: Tietojen puhdistus
+      organization:
+        update:
+          error: Organisaation päivitys epäonnistui.
+          success: Organisaation päivitys onnistui.
+    cleaner:
+      admin:
+        organization_cleaner:
+          edit:
+            update: Päivitä
+          form:
+            admin_log_cleaner_title: Hallintatoimintojen lokitiedot
+            inactive_users_cleaner_title: Passiiviset käyttäjät
+      delete_reason: Käyttäjä poistettiin käyttäjätilin passiivisuuden takia
+      inactive_users_mailer:
+        warning_deletion:
+          body_1: Käyttäjätilisi on ollut passiivisena %{days} päivää palvelussa <a href="%{organization_url}">%{organization_name} </a>.
+          body_2: Tämän takia käyttäjätilisi on nyt poistettu palvelusta.
+          greetings: Terveisin,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hei,
+          subject: Käyttäjätilisi on nyt poistettu
+        warning_inactive:
+          body_1: Käyttäjätilisi on ollut passiivisena %{days} päivää palvelussa %{organization_name}.
+          body_2: Mikäli et <a href="%{organization_url}">kirjaudu alustalle %{remaining_days} päivän aikana</a>, käyttäjätilisi poistetaan.
+          greetings: Terveisin,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hei,
+          subject: Käyttäjätilisi on ollut passiivisena pitkään

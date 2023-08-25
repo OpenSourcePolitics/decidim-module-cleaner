@@ -9,11 +9,11 @@ module Decidim
         Decidim::Organization.find_each do |organization|
           next unless organization.delete_inactive_users?
 
-          send_warning(Decidim::User.where(organization:)
+          send_warning(Decidim::User.unscoped.where(organization:)
                                     .not_deleted
                                     .where.not(email: "")
                                     .where("current_sign_in_at < ?", email_inactive_before_date(organization)))
-          delete_user_and_send_email(Decidim::User.where(organization:)
+          delete_user_and_send_email(Decidim::User.unscoped.where(organization:)
                                                   .not_deleted
                                                   .where.not(email: "")
                                                   .where("warning_date < ?", delete_inactive_before_date(organization)))

@@ -39,12 +39,24 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+    matrix:
+      include:
+        - decidim-version: '0.28.0'
+          ruby-version: '3.1.1'
+          node-version: '18.15.0'
+          gemfile: 'Gemfile'
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
         if: "github.ref != 'refs/heads/develop'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: OpenSourcePolitics/rspec-action@master
+        env:
+            DECIDIM_VERSION: ${{ matrix.decidim-version }}
+            RUBY_VERSION: ${{ matrix.ruby-version }}
+            NODE_VERSION: ${{ matrix.node-version }}
+            WEBPACKER_RUNTIME_COMPILE: ${{ matrix.webpacker-runtime-compile }}
+            BUNDLE_GEMFILE: ${{ matrix.gemfile }}
         with:
           command: "bundle exec rspec --exclude-pattern 'spec/system/**/*_spec.rb'"
   system_tests:

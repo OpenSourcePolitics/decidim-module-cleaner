@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# :nocov:
 module Decidim
   # This holds the decidim-meetings version.
   module Cleaner
@@ -8,9 +7,6 @@ module Decidim
       "4.1.2"
     end
 
-    def self.compatible_decidim_version
-      "0.28.dev"
-    end
+    COMPAT_DECIDIM_VERSION = [">= 0.26.0", "< 0.29"].freeze
   end
 end
-# :nocov:

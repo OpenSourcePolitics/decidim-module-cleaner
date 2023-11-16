@@ -3,6 +3,7 @@
 require "decidim/cleaner/admin"
 require "decidim/cleaner/engine"
 require "decidim/cleaner/admin_engine"
+require "decidim/cleaner/extends/commands/decidim/destroy_account"
 
 module Decidim
   # This namespace holds the logic of the `Cleaner` module.

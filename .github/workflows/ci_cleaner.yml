@@ -74,14 +74,12 @@ jobs:
       - uses: OpenSourcePolitics/rspec-action@master
         with:
           command: "bundle exec rspec spec/system"
-  release:
+  publish:
     if: "github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release' )"
     needs: [tests, system_tests, lint]
     runs-on: ubuntu-latest
     steps:
-      - uses: OpenSourcePolitics/release-gem-action@master
-  publish:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
       - uses: OpenSourcePolitics/publish-gem-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}

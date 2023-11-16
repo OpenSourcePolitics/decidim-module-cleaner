@@ -53,7 +53,7 @@ module Decidim::Cleaner::Admin
           expect { command.call }.to broadcast(:ok)
         end
 
-        it "traces the update", versioning: true do
+        it "traces the update", :versioning do
           expect(Decidim.traceability)
             .to receive(:update!)
             .with(organization, user, a_kind_of(Hash))

@@ -12,8 +12,8 @@ gem "puma", ">= 4.3"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-
   gem "decidim-dev", git: "https://github.com/decidim/decidim"
+  gem "rubocop-rails", "~> 2.19.0"
 end
 
 group :development do

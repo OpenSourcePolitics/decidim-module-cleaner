@@ -528,6 +528,8 @@ Style/GuardClause:
   MinBodyLength: 6
 
 Style/HashSyntax:
+  Exclude:
+    - app/jobs/decidim/cleaner/clean_inactive_users_job.rb
   EnforcedStyle: ruby19
   SupportedStyles:
     # checks for 1.9 syntax (e.g. {a: 1}) for all symbol keys

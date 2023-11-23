@@ -25,7 +25,10 @@ module Decidim
         users.find_each do |user|
           next if user.warning_date.present?
 
-          user.update!(warning_date: Time.zone.now) if InactiveUsersMailer.warning_inactive(user).deliver_now
+          if InactiveUsersMailer.warning_inactive(user).deliver_now
+            user.warning_date = Time.zone.now
+            user.save(validate: false)
+          end
           Rails.logger.info "Inactive warning sent to #{user.email}"
         end
       end
@@ -33,7 +36,8 @@ module Decidim
       def delete_user_and_send_email(users)
         users.find_each do |user|
           if user.current_sign_in_at > user.warning_date
-            user.update!(warning_date: nil)
+            user.warning_date = nil
+            user.save(validate: false)
             Rails.logger.info "User with id #{user.id} has logged in again, warning date reset"
             next
           end

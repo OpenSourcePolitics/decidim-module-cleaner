@@ -473,6 +473,8 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.5-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.14.5-x86_64-linux)
+      racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
       snaky_hash (~> 2.0)
@@ -652,7 +654,7 @@ GEM
     rubocop-faker (1.1.0)
       faker (>= 2.12.0)
       rubocop (>= 0.82.0)
-    rubocop-rails (2.22.1)
+    rubocop-rails (2.19.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -762,6 +764,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (~> 1.4)
@@ -773,6 +776,7 @@ DEPENDENCIES
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
   puma (>= 4.3)
+  rubocop-rails (~> 2.19.0)
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   web-console (~> 4.2)

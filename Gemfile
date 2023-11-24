@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim"
+gem "decidim", "~> 0.27.0"
 gem "decidim-cleaner", path: "."
 
 gem "bootsnap", "~> 1.4"
@@ -12,7 +12,7 @@ gem "puma", ">= 4.3"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev"
+  gem "decidim-dev", "~> 0.27.0"
   gem "rubocop-faker"
 end
 

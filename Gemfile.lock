@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-cleaner (2.1.1)
+    decidim-cleaner (2.1.2)
       decidim-core (~> 0.26.0)
 
 GEM

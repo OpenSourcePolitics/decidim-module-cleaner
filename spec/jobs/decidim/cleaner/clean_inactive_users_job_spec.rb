@@ -5,8 +5,9 @@ require "spec_helper"
 describe Decidim::Cleaner::CleanInactiveUsersJob do
   subject { described_class }
 
+  let!(:organization) { create(:organization, delete_inactive_users: true, delete_inactive_users_email_after: 25, delete_inactive_users_after: 5) }
+
   context "when the delay is specified" do
-    let!(:organization) { create(:organization, delete_inactive_users: true, delete_inactive_users_email_after: 25, delete_inactive_users_after: 5) }
     let!(:pending_user) { create(:user, organization: organization, current_sign_in_at: 27.days.ago) }
     let!(:inactive_user) { create(:user, organization: organization, current_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
     let!(:user) { create(:user, organization: organization) }
@@ -31,7 +32,7 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
       expect(user.reload).not_to be_deleted
     end
 
-    context "when users have destroyed his/her account" do
+    context "when user has destroyed her account" do
       let!(:pending_user) { create(:user, :deleted, organization: organization, current_sign_in_at: 27.days.ago) }
       let!(:inactive_user) { create(:user, :deleted, organization: organization, current_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
 
@@ -72,6 +73,26 @@ describe Decidim::Cleaner::CleanInactiveUsersJob do
 
         expect(inactive_user.reload.warning_date).to be_nil
       end
+    end
+  end
+
+  context "when user validation fails" do
+    let(:inactive_user) { build(:user, nickname: "#####", organization: organization, current_sign_in_at: 35.days.ago, warning_date: 10.days.ago) }
+
+    before do
+      inactive_user.save(validate: false)
+    end
+
+    it "sends email" do
+      expect(Decidim::Cleaner::InactiveUsersMailer).to receive(:warning_deletion).with(inactive_user).and_call_original
+
+      subject.perform_now
+    end
+
+    it "destroys user" do
+      subject.perform_now
+
+      expect(inactive_user.reload).to be_deleted
     end
   end
 end

@@ -6,6 +6,9 @@ def install_module(path)
   Dir.chdir(path) do
     system("bundle exec rake decidim_cleaner:install:migrations")
     system("bundle exec rake db:migrate")
+    system("npm install --save-dev @babel/plugin-proposal-private-methods")
+    system("npm install --save-dev @babel/plugin-proposal-private-property-in-object")
+    system("bundle exec rake assets:precompile")
   end
 end
 

@@ -6,6 +6,7 @@ module Decidim
       # Controller that allows managing the appearance of the organization.
       class OrganizationCleanerController < Decidim::Admin::ApplicationController
         include Decidim::Admin::Engine.routes.url_helpers
+
         layout "decidim/admin/settings"
 
         def edit

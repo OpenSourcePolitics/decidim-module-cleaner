@@ -1,4 +1,5 @@
-require: rubocop-factory_bot
+plugins:
+  - rubocop-factory_bot
 
 inherit_from:
   - .rubocop_ruby.yml

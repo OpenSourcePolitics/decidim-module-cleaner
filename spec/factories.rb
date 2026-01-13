@@ -29,10 +29,8 @@ FactoryBot.modify do
     users_registration_mode { :enabled }
     official_img_footer { Decidim::Dev.test_file("avatar.jpg", "image/jpeg") }
     official_url { Faker::Internet.url }
-    highlighted_content_banner_enabled { false }
     enable_omnipresent_banner { false }
     badges_enabled { true }
-    user_groups_enabled { true }
     send_welcome_notification { true }
     comments_max_length { 1000 }
     admin_terms_of_service_body { generate_localized_description(:admin_terms_of_service_body, skip_injection:) }

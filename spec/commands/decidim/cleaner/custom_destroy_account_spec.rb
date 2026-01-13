@@ -61,6 +61,12 @@ module Decidim
           expect(user.about).to eq("")
         end
 
+        it "sets notifications_sending_frequency to none" do
+          command.call
+          user.reload
+          expect(user.notifications_sending_frequency).to eq("none")
+        end
+
         it "destroys the current user avatar" do
           command.call
           expect(user.reload.avatar).not_to be_present
@@ -70,15 +76,6 @@ module Decidim
           expect do
             command.call
           end.to change(Identity, :count).by(-1)
-        end
-
-        it "deletes user group memberships" do
-          user_group = create(:user_group)
-          create(:user_group_membership, user_group:, user:)
-
-          expect do
-            command.call
-          end.to change(UserGroupMembership, :count).by(-1)
         end
 
         it "deletes the follows" do
